@@ -11,10 +11,12 @@ module.exports = app => {
       return
     }
     const issueComment = context.issue({ body: '🧠Are you Okey ? 🧠' })
+    const config = await context.config('config.yml')
+    console.log('thi is the config: ',config)
     return context.github.issues.createComment(issueComment)
   })
   app.on('issues.opened', async context => {
-    const params = context.issue({labels: ['🧠 needs-response 🧠']})
+    const params = context.issue({ labels: ['🧠 needs-response 🧠'] })
     await context.github.issues.addLabels(params)
   })
 
